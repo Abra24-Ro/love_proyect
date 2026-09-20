@@ -1,0 +1,7 @@
+export * from './regalo/Prisma'
+export * from './regalo/CajaRegalo'
+export * from './regalo/tiempos'
+export * from './regalo/Mono'
+export * from './regalo/PolvoDorado'
+export * from './sobres/Sobre'
+export * from './sobres/AbanicoSobres'

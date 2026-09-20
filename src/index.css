@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  /* Noche */
+  --color-noche-950: #05060f;
+  --color-noche-900: #0a0d1f;
+  --color-noche-800: #121633;
+
+  /* Amarillos (de crema a ámbar) */
+  --color-sol-50: #fffbe6;
+  --color-sol-200: #fff08a;
+  --color-sol-300: #ffe14d;
+  --color-sol-400: #ffd21f;
+  --color-sol-500: #ffb703;
+  --color-ambar-600: #e08a00;
+
+  /* Acento suave para corazones */
+  --color-rosa-400: #ff8fab;
+  /* Tinta oscura para el texto sobre papel crema */
+  --color-tinta: #7a4a00;
+
+  --font-script: "Great Vibes", cursive;
+  --font-hand: "Caveat", cursive;
+  --font-sans: "Quicksand", ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-glow: 0 0 20px rgb(255 210 31 / 0.55), 0 0 60px rgb(255 183 3 / 0.35);
+
+  --animate-twinkle: twinkle 3s ease-in-out infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50%      { opacity: 1;   transform: scale(1.15); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { filter: drop-shadow(0 0 8px rgb(255 210 31 / 0.5)); }
+    50%      { filter: drop-shadow(0 0 22px rgb(255 210 31 / 0.9)); }
+  }
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-noche-950 font-sans text-sol-50 antialiased;
+    overflow: hidden;
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgb(255 183 3 / 0.10), transparent 60%),
+      radial-gradient(ellipse at 50% 100%, rgb(18 22 51 / 0.9), transparent 70%);
+  }
+
+  button {
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+}
+
+/* Utilidades propias */
+@utility text-glow {
+  text-shadow:
+    0 0 12px rgb(255 210 31 / 0.7),
+    0 0 32px rgb(255 183 3 / 0.45);
+}
+
+@utility scene {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: max(1.5rem, env(safe-area-inset-top)) 1.5rem max(1.5rem, env(safe-area-inset-bottom));
+}
+
+@utility btn-glow {
+  @apply rounded-full border border-sol-300/60 bg-sol-400/10 px-8 py-3
+         font-hand text-2xl text-sol-200 shadow-glow backdrop-blur-sm
+         transition-colors duration-300 hover:bg-sol-400/20;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
