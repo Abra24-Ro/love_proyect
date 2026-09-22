@@ -8,10 +8,13 @@ import {
 } from "../components/regalo/tiempos";
 import { desbloquear, iniciarMusica, precargar, tocar } from "../audio/sonido";
 import { useEscalaVista } from "../hooks/useEscalaVista";
+import { useSobresStore } from "../store/useSobresStore";
+import SobreOverlay from "../components/sobres/SobreOverlay";
 
 export default function Regalo() {
   const [abierta, setAbierta] = useState(false);
   const escala = useEscalaVista();
+  const activo = useSobresStore((s) => s.activo);
 
   useEffect(() => {
     void precargar(["tapa.mp3", "magia.mp3"]);
@@ -43,9 +46,11 @@ export default function Regalo() {
       />
 
       {/* Nivel 1: título, siempre arriba */}
-      <div
-        className="absolute inset-x-0 z-10 flex justify-center px-6 text-center"
-        style={{ top: "max(2.5rem, env(safe-area-inset-top))" }}
+      <motion.div
+        className="absolute inset-x-0 z-10 flex flex-col items-center gap-1 px-6 text-center"
+        style={{ top: "max(2rem, env(safe-area-inset-top))" }}
+        animate={{ opacity: activo ? 0 : 1 }}
+        transition={{ duration: 0.4 }}
       >
         <AnimatePresence mode="wait">
           <motion.h1
@@ -62,7 +67,15 @@ export default function Regalo() {
             {abierta ? "Elige uno..." : "Tengo algo para ti..."}
           </motion.h1>
         </AnimatePresence>
-      </div>
+        <motion.p
+          className="font-hand text-xl text-sol-200/70"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: abierta ? 1 : 0 }}
+          transition={{ duration: 1, delay: abierta ? DELAY_SOBRES + 1.8 : 0 }}
+        >
+          toca el que quieras
+        </motion.p>
+      </motion.div>
 
       {/* Niveles 2 y 3: sobres y caja */}
       <div
@@ -91,6 +104,7 @@ export default function Regalo() {
           ↺ reiniciar (dev)
         </button>
       )}
+      {activo && <SobreOverlay key={activo} />}
     </motion.main>
   );
 }

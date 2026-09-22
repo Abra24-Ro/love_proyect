@@ -5,3 +5,15 @@ export * from './regalo/Mono'
 export * from './regalo/PolvoDorado'
 export * from './sobres/Sobre'
 export * from './sobres/AbanicoSobres'
+export * from './sobres/tiempos'
+export * from './recuerdos/TarjetaRecuerdo';
+export * from './recuerdos/PilaRecuerdos'
+export * from "./galaxia/estilosFlor"
+export * from "./galaxia/FlorSVG"
+export * from "./galaxia/FlorOrbitante"
+export * from "./galaxia/Nucleo"
+export * from "./galaxia/GalaxiaCanvas"
+export * from "./galaxia/EscenaGalaxia"
+export * from "./galaxia/MensajeFlor"
+export * from "./galaxia/LluviaPetalos"
+export * from "./galaxia/MensajeUltimo"
